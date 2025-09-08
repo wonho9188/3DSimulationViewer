@@ -30,3 +30,41 @@
     box-shadow: none !important;
     // background-color: #1c2ded !important;
 }
+
+.floating-arrow-pad {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+}
+.floating-arrow-pad > div {
+  display: flex;
+  gap: 0px;
+}
+.arrow-btn {
+  width: 48px;
+  height: 48px;
+  font-size: 2rem;
+  border-radius: 50%;
+  border: none;
+  mask-image: url(../images/key_arrow.svg);
+  mask-size: contain;
+  background: rgb(0,0,0,0.5);
+  cursor: pointer;
+  &.left {
+    rotate: 90deg;
+  }
+  &.up {
+    rotate: 180deg;
+  }
+  &.right {
+    rotate: 270deg;
+  }
+}
+.arrow-btn:active {
+  background: rgb(0,0,0,0.7);
+}

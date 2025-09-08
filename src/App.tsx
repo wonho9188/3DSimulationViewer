@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from '@react-three/drei';
 // import type { OrbitControls as OrbitControlsType } from 'three/examples/jsm/controls/OrbitControls';
@@ -141,10 +141,10 @@ const App: React.FC = () => {
         // 3. 키 입력 이동
         const moveSpeed = 5 * delta;
         let forward = 0;
-        const upPressed = keyboard.pressed('up') || keyboard.pressed('W');
-        const downPressed = keyboard.pressed('down') || keyboard.pressed('S');
-        const leftPressed = keyboard.pressed('left') || keyboard.pressed('A');
-        const rightPressed = keyboard.pressed('right') || keyboard.pressed('D');
+        const upPressed = keyboard.pressed('up') || keyboard.pressed('W') || mouseUp.current;
+        const downPressed = keyboard.pressed('down') || keyboard.pressed('S') || mouseDown.current;
+        const leftPressed = keyboard.pressed('left') || keyboard.pressed('A') || mouseLeft.current;
+        const rightPressed = keyboard.pressed('right') || keyboard.pressed('D') || mouseRight.current;
         if (upPressed) forward -= moveSpeed;
         if (downPressed) forward += moveSpeed;
 
@@ -268,6 +268,10 @@ const App: React.FC = () => {
 
   // 디버그용 상태: x, z, 각도
   const debugRef = useRef<HTMLDivElement>(null);
+  const mouseUp = useRef<boolean>(false);
+  const mouseLeft = useRef<boolean>(false);
+  const mouseDown = useRef<boolean>(false);
+  const mouseRight = useRef<boolean>(false);
 
   return (
     <div className="app">
@@ -297,6 +301,51 @@ const App: React.FC = () => {
           <Button onClick={() => handleButtonClick('hospital')} variant='contained'> 병원 </Button>
           <Button onClick={() => handleButtonClick('library')} variant="contained"> 도서실 </Button>
           <Button onClick={() => handleButtonClick('convenience_store')} variant="contained"> 편의점 </Button>
+        </div>
+        {/* 상하좌우 플로팅 버튼 */}
+        <div className="floating-arrow-pad">
+          <button
+            className="arrow-btn up"
+            aria-label="up"
+            onMouseDown={() => { mouseUp.current = true; }}
+            onMouseUp={() => { mouseUp.current = false; }}
+            onMouseLeave={() => { mouseUp.current = false; }}
+            onTouchStart={() => { mouseUp.current = true; }}
+            onTouchEnd={() => { mouseUp.current = false; }}
+            onTouchCancel={() => { mouseUp.current = false; }}
+          ></button>
+          <div>
+            <button
+              className="arrow-btn left"
+              aria-label="left"
+              onMouseDown={() => { mouseLeft.current = true; }}
+              onMouseUp={() => { mouseLeft.current = false; }}
+              onMouseLeave={() => { mouseLeft.current = false; }}
+              onTouchStart={() => { mouseLeft.current = true; }}
+              onTouchEnd={() => { mouseLeft.current = false; }}
+              onTouchCancel={() => { mouseLeft.current = false; }}
+            ></button>
+            <button
+              className="arrow-btn down"
+              aria-label="down"
+              onMouseDown={() => { mouseDown.current = true; }}
+              onMouseUp={() => { mouseDown.current = false; }}
+              onMouseLeave={() => { mouseDown.current = false; }}
+              onTouchStart={() => { mouseDown.current = true; }}
+              onTouchEnd={() => { mouseDown.current = false; }}
+              onTouchCancel={() => { mouseDown.current = false; }}
+            ></button>
+            <button
+              className="arrow-btn right"
+              aria-label="right"
+              onMouseDown={() => { mouseRight.current = true; }}
+              onMouseUp={() => { mouseRight.current = false; }}
+              onMouseLeave={() => { mouseRight.current = false; }}
+              onTouchStart={() => { mouseRight.current = true; }}
+              onTouchEnd={() => { mouseRight.current = false; }}
+              onTouchCancel={() => { mouseRight.current = false; }}
+            ></button>
+          </div>
         </div>
       </ThemeProvider>
     </div>
