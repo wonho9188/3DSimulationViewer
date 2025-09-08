@@ -1,0 +1,32 @@
+// 디버그 패널 스타일
+.debug-panel {
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    background: rgba(255,255,255,0.92);
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 15px;
+    color: #222;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.app {
+    width: calc(100vw);
+    height: 100vh;
+}
+
+.floating-section {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;   
+}
+
+.MuiButtonBase-root {
+    box-shadow: none !important;
+    // background-color: #1c2ded !important;
+}
